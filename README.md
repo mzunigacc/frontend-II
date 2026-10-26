@@ -74,7 +74,9 @@ Iniciar el servidor de desarrollo:
 npm run dev
 ```
 
-La aplicación estará disponible en la dirección indicada por Vite en la terminal.
+## Sitio publicado
+
+GitHub Pages: https://mzunigacc.github.io/frontend-II/
 
 ## Autor
 
