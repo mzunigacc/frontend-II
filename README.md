@@ -1,16 +1,83 @@
-# React + Vite
+# Desarrollo Frontend II - PFY2202
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Repositorio académico utilizado para el desarrollo de las actividades de la asignatura **Desarrollo Frontend II (PFY2202)**.
 
-Currently, two official plugins are available:
+## Semana 1 - React Router
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Durante la Semana 1 se desarrolló una aplicación web en React orientada a la gestión de inventario de un supermercado.
 
-## React Compiler
+La actividad tiene como objetivo implementar navegación entre distintas vistas dentro de una aplicación SPA, utilizando React Router para evitar recargas completas de la página.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Funcionalidades implementadas
 
-## Expanding the Oxlint configuration
+- Página principal de gestión de inventario.
+- Visualización de productos disponibles.
+- Visualización de precio, categoría y stock por producto.
+- Identificación de productos con stock bajo.
+- Resumen de cantidad de productos, categorías y productos con bajo stock.
+- Página de sucursales.
+- Página de preguntas frecuentes.
+- Menú de navegación inferior.
+- Navegación entre vistas mediante React Router.
+- Navegación sin recarga completa de la página.
+- Diseño responsivo para distintas resoluciones.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Rutas
+
+La aplicación contiene las siguientes vistas:
+
+- `/` - Inventario principal.
+- `/tiendas` - Nuestras tiendas.
+- `/preguntas-frecuentes` - Preguntas frecuentes.
+
+## Tecnologías utilizadas
+
+- React
+- Vite
+- React Router
+- JavaScript
+- JSX
+- CSS
+- Git
+- GitHub
+
+## Estructura principal
+
+```text
+src/
+├── components/
+│   ├── BottomNav.jsx
+│   └── Header.jsx
+├── data/
+│   └── products.js
+├── pages/
+│   ├── FAQ.jsx
+│   ├── Home.jsx
+│   └── Stores.jsx
+├── App.css
+├── App.jsx
+├── index.css
+└── main.jsx
+```
+
+## Ejecución local
+
+Instalar las dependencias:
+
+```bash
+npm install
+```
+
+Iniciar el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+La aplicación estará disponible en la dirección indicada por Vite en la terminal.
+
+## Autor
+
+Matías Zúñiga C.
+
+Desarrollo Frontend II - PFY2202
