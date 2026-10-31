@@ -1,6 +1,8 @@
-import products from "../data/products";
+import { useInventory } from "../context/InventoryContext";
 
 function Home() {
+  const { products } = useInventory();
+
   const totalProducts = products.length;
 
   const lowStock = products.filter(
@@ -8,7 +10,7 @@ function Home() {
   ).length;
 
   const categories = new Set(
-    products.map((product) => product.category)
+    products.map((product) => product.type)
   ).size;
 
   return (
@@ -54,10 +56,12 @@ function Home() {
             <article className="product-card" key={product.id}>
               <div>
                 <span className="product-category">
-                  {product.category}
+                  {product.type}
                 </span>
 
                 <h3>{product.name}</h3>
+
+                <p>{product.brand}</p>
 
                 <p>
                   ${product.price.toLocaleString("es-CL")}
