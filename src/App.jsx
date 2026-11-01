@@ -14,12 +14,11 @@ import AddProduct from "./pages/AddProduct";
 import Inventory from "./pages/Inventory";
 import NotFound from "./pages/NotFound";
 
-import "./App.css";
 
 function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <div className="app">
+      <div className="min-h-screen bg-slate-100 pb-24 text-slate-900">
         <Header />
 
         <Routes>

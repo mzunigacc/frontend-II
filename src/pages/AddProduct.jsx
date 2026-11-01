@@ -13,6 +13,7 @@ function AddProduct() {
   });
 
   const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,6 +22,11 @@ function AddProduct() {
       ...currentData,
       [name]: value,
     }));
+
+    if (message) {
+      setMessage("");
+      setIsError(false);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -34,6 +40,7 @@ function AddProduct() {
       formData.price === ""
     ) {
       setMessage("Completa todos los campos antes de guardar.");
+      setIsError(true);
       return;
     }
 
@@ -54,23 +61,43 @@ function AddProduct() {
     });
 
     setMessage("Artículo agregado correctamente.");
+    setIsError(false);
   };
 
+  const inputClass =
+    "w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-2 focus:ring-blue-100";
+
   return (
-    <main className="page">
-      <section className="hero">
-        <p className="eyebrow">Gestión de inventario</p>
-        <h2>Agregar artículo</h2>
-        <p>
+    <main className="mx-auto w-[88%] max-w-6xl py-10">
+      <section className="mb-8">
+        <p className="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
+          Gestión de inventario
+        </p>
+
+        <h2 className="text-3xl font-bold text-blue-900 md:text-4xl">
+          Agregar artículo
+        </h2>
+
+        <p className="mt-3 max-w-2xl text-slate-600">
           Registra un nuevo producto para incorporarlo al inventario
           global del supermercado.
         </p>
       </section>
 
-      <form className="product-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Nombre</label>
+      <form
+        className="grid max-w-2xl gap-5 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+        onSubmit={handleSubmit}
+      >
+        <div className="grid gap-2">
+          <label
+            className="font-semibold text-slate-700"
+            htmlFor="name"
+          >
+            Nombre
+          </label>
+
           <input
+            className={inputClass}
             id="name"
             name="name"
             type="text"
@@ -80,9 +107,16 @@ function AddProduct() {
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="brand">Marca</label>
+        <div className="grid gap-2">
+          <label
+            className="font-semibold text-slate-700"
+            htmlFor="brand"
+          >
+            Marca
+          </label>
+
           <input
+            className={inputClass}
             id="brand"
             name="brand"
             type="text"
@@ -92,9 +126,16 @@ function AddProduct() {
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="type">Tipo de producto</label>
+        <div className="grid gap-2">
+          <label
+            className="font-semibold text-slate-700"
+            htmlFor="type"
+          >
+            Tipo de producto
+          </label>
+
           <input
+            className={inputClass}
             id="type"
             name="type"
             type="text"
@@ -104,38 +145,63 @@ function AddProduct() {
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="stock">Stock</label>
-          <input
-            id="stock"
-            name="stock"
-            type="number"
-            min="0"
-            value={formData.stock}
-            onChange={handleChange}
-            placeholder="Ej: 20"
-          />
+        <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-2">
+            <label
+              className="font-semibold text-slate-700"
+              htmlFor="stock"
+            >
+              Stock
+            </label>
+
+            <input
+              className={inputClass}
+              id="stock"
+              name="stock"
+              type="number"
+              min="0"
+              value={formData.stock}
+              onChange={handleChange}
+              placeholder="Ej: 20"
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <label
+              className="font-semibold text-slate-700"
+              htmlFor="price"
+            >
+              Precio
+            </label>
+
+            <input
+              className={inputClass}
+              id="price"
+              name="price"
+              type="number"
+              min="0"
+              value={formData.price}
+              onChange={handleChange}
+              placeholder="Ej: 3990"
+            />
+          </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="price">Precio</label>
-          <input
-            id="price"
-            name="price"
-            type="number"
-            min="0"
-            value={formData.price}
-            onChange={handleChange}
-            placeholder="Ej: 3990"
-          />
-        </div>
-
-        <button className="primary-button" type="submit">
+        <button
+          className="mt-1 rounded-lg bg-blue-900 px-5 py-3 font-semibold text-white transition hover:bg-blue-800"
+          type="submit"
+        >
           Agregar artículo
         </button>
 
         {message && (
-          <p className="form-message">
+          <p
+            className={
+              isError
+                ? "font-semibold text-red-600"
+                : "font-semibold text-green-700"
+            }
+          >
             {message}
           </p>
         )}
