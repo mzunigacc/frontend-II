@@ -10,6 +10,9 @@ import BottomNav from "./components/BottomNav";
 import Home from "./pages/Home";
 import Stores from "./pages/Stores";
 import FAQ from "./pages/FAQ";
+import AddProduct from "./pages/AddProduct";
+import Inventory from "./pages/Inventory";
+import NotFound from "./pages/NotFound";
 
 import "./App.css";
 
@@ -21,10 +24,30 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/tiendas" element={<Stores />} />
+
+          <Route
+            path="/inventario"
+            element={<Inventory />}
+          />
+
+          <Route
+            path="/agregar"
+            element={<AddProduct />}
+          />
+
+          <Route
+            path="/tiendas"
+            element={<Stores />}
+          />
+
           <Route
             path="/preguntas-frecuentes"
             element={<FAQ />}
+          />
+
+          <Route
+            path="*"
+            element={<NotFound />}
           />
         </Routes>
 

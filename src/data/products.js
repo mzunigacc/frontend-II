@@ -41,7 +41,7 @@ const products = [
   },
   {
     id: 6,
-    name: "Yogur",
+    name: "Yogurt",
     brand: "Lácteos del Valle",
     type: "Lácteos",
     stock: 11,
