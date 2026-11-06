@@ -13,6 +13,7 @@ import FAQ from "./pages/FAQ";
 import AddProduct from "./pages/AddProduct";
 import Inventory from "./pages/Inventory";
 import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 
 
@@ -24,6 +25,8 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+
+          <Route path="/carrito" element={<Cart />} />
 
           <Route path="/inventario/:id" element={<ProductDetail />} />
 

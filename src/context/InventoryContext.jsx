@@ -6,19 +6,87 @@ import {
 
 import initialProducts from "../data/products";
 
-const InventoryContext = createContext();
+const InventoryContext = createContext(null);
 
-const ACTIONS = {
-  ADD_PRODUCT: "add-product",
+const initialState = {
+  products: initialProducts,
+  cart: [],
 };
 
 function inventoryReducer(state, action) {
   switch (action.type) {
-    case ACTIONS.ADD_PRODUCT:
-      return [
+    case "ADD_PRODUCT":
+      return {
         ...state,
-        action.payload,
-      ];
+        products: [...state.products, action.payload],
+      };
+
+    case "ADD_TO_CART": {
+      const product = state.products.find(
+        (item) => item.id === action.payload
+      );
+
+      if (!product || product.stock <= 0) {
+        return state;
+      }
+
+      const existingItem = state.cart.find(
+        (item) => item.id === product.id
+      );
+
+      const cart = existingItem
+        ? state.cart.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          )
+        : [
+            ...state.cart,
+            {
+              id: product.id,
+              name: product.name,
+              brand: product.brand,
+              price: product.price,
+              quantity: 1,
+            },
+          ];
+
+      return {
+        ...state,
+        products: state.products.map((item) =>
+          item.id === product.id
+            ? { ...item, stock: item.stock - 1 }
+            : item
+        ),
+        cart,
+      };
+    }
+
+    case "DECREASE_CART": {
+      const cartItem = state.cart.find(
+        (item) => item.id === action.payload
+      );
+
+      if (!cartItem) {
+        return state;
+      }
+
+      return {
+        ...state,
+        products: state.products.map((item) =>
+          item.id === cartItem.id
+            ? { ...item, stock: item.stock + 1 }
+            : item
+        ),
+        cart: state.cart
+          .map((item) =>
+            item.id === cartItem.id
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          )
+          .filter((item) => item.quantity > 0),
+      };
+    }
 
     default:
       return state;
@@ -26,26 +94,43 @@ function inventoryReducer(state, action) {
 }
 
 export function InventoryProvider({ children }) {
-  const [products, dispatch] = useReducer(
+  const [state, dispatch] = useReducer(
     inventoryReducer,
-    initialProducts
+    initialState
   );
 
   const addProduct = (product) => {
     dispatch({
-      type: ACTIONS.ADD_PRODUCT,
+      type: "ADD_PRODUCT",
       payload: {
         ...product,
-        id: Date.now(),
+        id: crypto.randomUUID(),
       },
+    });
+  };
+
+  const addToCart = (id) => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: id,
+    });
+  };
+
+  const decreaseCart = (id) => {
+    dispatch({
+      type: "DECREASE_CART",
+      payload: id,
     });
   };
 
   return (
     <InventoryContext.Provider
       value={{
-        products,
+        products: state.products,
+        cart: state.cart,
         addProduct,
+        addToCart,
+        decreaseCart,
       }}
     >
       {children}
@@ -54,5 +139,13 @@ export function InventoryProvider({ children }) {
 }
 
 export function useInventory() {
-  return useContext(InventoryContext);
+  const context = useContext(InventoryContext);
+
+  if (!context) {
+    throw new Error(
+      "useInventory debe utilizarse dentro de InventoryProvider"
+    );
+  }
+
+  return context;
 }
