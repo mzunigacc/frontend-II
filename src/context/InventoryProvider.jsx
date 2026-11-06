@@ -1,12 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useReducer,
-} from "react";
+import { useReducer } from "react";
+import { InventoryContext } from "./InventoryContext";
 
 import initialProducts from "../data/products";
 
-const InventoryContext = createContext(null);
+
 
 const initialState = {
   products: initialProducts,
@@ -136,16 +133,4 @@ export function InventoryProvider({ children }) {
       {children}
     </InventoryContext.Provider>
   );
-}
-
-export function useInventory() {
-  const context = useContext(InventoryContext);
-
-  if (!context) {
-    throw new Error(
-      "useInventory debe utilizarse dentro de InventoryProvider"
-    );
-  }
-
-  return context;
 }

@@ -1,4 +1,4 @@
-import { useInventory } from "../context/InventoryContext";
+import { useInventory } from "../context/useInventory";
 
 import PageHeader from "../components/PageHeader";
 import ProductCard from "../components/ProductCard";

@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-import { useInventory } from "../context/InventoryContext";
+import { useInventory } from "../context/useInventory";
 import PageHeader from "../components/PageHeader";
 
 function Cart() {

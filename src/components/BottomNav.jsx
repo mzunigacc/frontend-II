@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { useInventory } from "../context/InventoryContext";
+import { useInventory } from "../context/useInventory";
 
 function BottomNav() {
   const { cart } = useInventory();

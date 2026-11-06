@@ -1,7 +1,7 @@
 import PageHeader from "../components/PageHeader";
 import { useState } from "react";
 import { validateProduct } from "../utils/validateProduct";
-import { useInventory } from "../context/InventoryContext";
+import { useInventory } from "../context/useInventory";
 
 function AddProduct() {
   const { addProduct } = useInventory();
