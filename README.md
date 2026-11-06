@@ -146,3 +146,36 @@ https://mzunigacc.github.io/frontend-II/
 Matías Zúñiga C.
 
 Desarrollo Frontend II - PFY2202
+## Semana 3 - Desarrollo avanzado de React
+
+Durante la Semana 3 se ampliaron las funcionalidades del supermercado, incorporando navegación dinámica, carrito de compras y sincronización del inventario.
+
+### Funcionalidades implementadas
+
+- Filtro dinámico de artículos por categoría, sin modificar el inventario original.
+- Vista de detalle individual mediante rutas dinámicas (`/inventario/:id`).
+- Carrito de compras con controles para aumentar y disminuir cantidades.
+- Actualización automática del stock al agregar o devolver unidades.
+- Control de disponibilidad para evitar stock negativo.
+- Validaciones reutilizables mediante `validateProduct`.
+- Formulario controlado con `useReducer` y errores por campo.
+
+### Mejoras técnicas
+
+- Componentes reutilizables: `PageHeader`, `ProductCard` y `StockBadge`.
+- Selectores para cálculos y filtros del inventario.
+- Separación de `InventoryContext`, `InventoryProvider` y `useInventory`.
+- Identificadores únicos mediante `crypto.randomUUID()`.
+- Mantención del diseño responsivo con Tailwind CSS.
+- Validación de compilación y análisis estático sin errores ni advertencias.
+
+### Nuevas rutas
+
+- `/inventario/:id` - Detalle de un artículo.
+- `/carrito` - Carrito de compras.
+
+### Validaciones
+
+Se comprobaron los filtros, el registro de productos, la navegación y la sincronización de cantidades entre carrito e inventario, incluyendo casos sin stock y valores incorrectos.
+
+El estado se mantiene en memoria durante la navegación SPA y se reinicia al recargar la aplicación.
