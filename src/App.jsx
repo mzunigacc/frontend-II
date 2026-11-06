@@ -12,6 +12,7 @@ import Stores from "./pages/Stores";
 import FAQ from "./pages/FAQ";
 import AddProduct from "./pages/AddProduct";
 import Inventory from "./pages/Inventory";
+import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
 
 
@@ -23,6 +24,8 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+
+          <Route path="/inventario/:id" element={<ProductDetail />} />
 
           <Route
             path="/inventario"

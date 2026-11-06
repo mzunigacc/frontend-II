@@ -105,7 +105,12 @@ function Inventory() {
                 className="border-t border-slate-200 hover:bg-slate-50"
               >
                 <td className="px-5 py-4 font-medium text-slate-900">
-                  {product.name}
+                  <Link
+                    to={`/inventario/${product.id}`}
+                    className="font-semibold text-blue-900 hover:underline"
+                  >
+                    {product.name}
+                  </Link>
                 </td>
 
                 <td className="px-5 py-4 text-slate-600">
