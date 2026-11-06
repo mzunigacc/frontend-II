@@ -1,5 +1,6 @@
 import PageHeader from "../components/PageHeader";
 import { useState } from "react";
+import { validateProduct } from "../utils/validateProduct";
 import { useInventory } from "../context/InventoryContext";
 
 function AddProduct() {
@@ -33,14 +34,10 @@ function AddProduct() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (
-      !formData.name.trim() ||
-      !formData.brand.trim() ||
-      !formData.type.trim() ||
-      formData.stock === "" ||
-      formData.price === ""
-    ) {
-      setMessage("Completa todos los campos antes de guardar.");
+    const validation = validateProduct(formData);
+
+    if (!validation.isValid) {
+      setMessage(Object.values(validation.errors).join(" "));
       setIsError(true);
       return;
     }
